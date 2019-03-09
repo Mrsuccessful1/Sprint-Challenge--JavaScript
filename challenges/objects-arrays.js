@@ -13,10 +13,11 @@ class Dinosaurs {
     this.weight = attrib.weight;
     this.length = attrib.length;
     this.period = attrib.period;
+    this.phrase = attrib.phrase;
   }
 
-  roar(phrase){
-    return `${this.name} says ${phrase}`;
+  roar(){
+    return this.phrase;
   }
 }
 
@@ -25,7 +26,8 @@ const tyrannosaurus = new Dinosaurs({
   diet: 'carnivorous',
   weight: '7000kg',
   length: '12m',
-  period: 'Late Cretaceious'
+  period: 'Late Cretaceious',
+  phrase: '"RAWERSRARARWERSARARARRRR!"',
 });
 
 const stegosaurus = new Dinosaurs({
@@ -43,13 +45,6 @@ const velociraptor = new Dinosaurs({
   length: '1.8m',
   period: 'Late Cretaceious'
 });
-
-
-console.log(tyrannosaurus.weight);
-console.log(velociraptor.diet);
-console.log(stegosaurus.length);
-console.log(tyrannosaurus.period);
-console.log(tyrannosaurus.roar('"RAWERSRARARWERSARARARRRR!"'));
 
 // tyrannosaurus, carnivorous, 7000kg, 12m, Late Cretaceious
 
@@ -73,7 +68,7 @@ console.log(tyrannosaurus.period);
 
 
 // Create a new roar method for the tyrannosaurus.  When called, return "RAWERSRARARWERSARARARRRR!" Log the result.
-console.log(tyrannosaurus.roar('"RAWERSRARARWERSARARARRRR!"'));
+console.log(tyrannosaurus.roar());
 
 
 // ==== Arrays ====
@@ -96,13 +91,10 @@ const graduates = [{"id":1,"first_name":"Cynde","university":"Missouri Southern 
 Once you have the new array created, sort the universities alphabetically and log the result. */
 const universities = [];
 for (let i = 0 ; i < graduates.length; i++){
-    function doSomething(){
-      universities.push(graduates[i].university);
-      universities.sort();
-    }
-    doSomething(); 
+  universities.push(graduates[i].university);
 }
-console.log(universities);
+
+console.log(universities.sort());
 
 /* Request 2: Create a new array called contactInfo that contains both first name and email of each student. 
 
@@ -156,7 +148,7 @@ The zoo wants to display both the scientific name and the animal name in front o
 
 */
 const animalNames = [];
-zooAnimals.map(zooAnimals => animalNames.push(`Name: ${zooAnimals.animal_name} Scientific: ${zooAnimals.scientific_name}.`));
+zooAnimals.forEach(zooAnimals => animalNames.push(`Name: ${zooAnimals.animal_name} Scientific: ${zooAnimals.scientific_name}.`));
 console.log(animalNames);
 
 /* Request 2: .map()    
@@ -175,7 +167,7 @@ The zoos are concerned about animals with a lower population count. Find out whi
 
 */
 const largerPopulation = zooAnimals.filter( function (currentValue) {
-  if(currentValue.population <= 5){
+  if(currentValue.population < 5){
     return true;
   }
 });
@@ -186,9 +178,7 @@ console.log(largerPopulation);
 The zoos need to know their total animal population across the United States.  Find the total population from all the zoos using the .reduce() method.
 
 */
-const populationTotal = zooAnimals.reduce(function(accumulator, currentValue,){ 
-  return accumulator + currentValue.population;
-},0);
+const populationTotal = zooAnimals.reduce((accumulator, currentValue,) => accumulator + currentValue.population,0);
 
 console.log(populationTotal);
 
